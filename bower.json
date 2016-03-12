@@ -1,0 +1,21 @@
+{
+  "name": "fuckwebpack",
+  "description": "As the title",
+  "main": "server.js",
+  "authors": [
+    "Lumpy Chen"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "webpack",
+    "react",
+    "jquery",
+    "bootstrap"
+  ],
+  "homepage": "https://github.com/LumpyChen/Javascript-Practice",
+  "moduleType": [],
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
