@@ -14,7 +14,7 @@ export default class App extends React.Component {
     }
     handleClick(e){
         e.preventDefault();
-        console.log(e.target)
+        //console.log(e.target)
         this.setState({
            position:e.target.name
         });
