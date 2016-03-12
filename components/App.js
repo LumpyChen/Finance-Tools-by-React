@@ -28,7 +28,7 @@ export default class App extends React.Component {
                         <div className="panel panel-default">
                             <div className="panel-heading">
                                 <h3 className="panel-title">
-                                    Mortgage Loan's Calculator
+                                    <i className="fa fa-calculator"></i>&nbsp;&nbsp;Mortgage Loan's Calculator
                                 </h3>
                             </div>
                             <div className="panel-body">
