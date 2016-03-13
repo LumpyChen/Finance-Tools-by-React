@@ -26,7 +26,7 @@ export default class Loan extends React.Component {
         })
 
         if(Method=='a') {
-            
+
             for(let i=0;i<Times*12;i++) {
                 arr.push({
                     begin: arr[i].remain,
