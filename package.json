@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Finance lesson's homework's expanding.",
   "main": "server.js",
-  "dependencies": {},
+  "dependencies": {
+    "react-link-state": "^0.1.2",
+    "react-mixin": "^2.0.2"
+  },
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.6.5",

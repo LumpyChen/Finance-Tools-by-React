@@ -3,20 +3,62 @@
  */
 
 import ReactDOM from 'react-dom'
-import ReactAdd from 'react/addons'
+import linkState from 'react-link-state';
 import App from './App'
 import Loan from './Loan'
 
-module.exports = class Mortgage extends ReactAdd.Component {
+
+
+
+export default class Mortgage extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
-            Loans:0,
-            Rate:0,
+            Loans:"",
+            Rate:4.9,
             Times:12,
-            Method:"a"
+            Method:'a',
+            LoadMounted:false
         };
+
+    }
+    componentDidMount(){
+        this.refs.cal.disabled = "disabled";
+    }
+    componentDidUpdate(){
+        console.log(this.state.Method+'final');
+        if(/^\d+$/.test(this.state.Loans)&&!(Number.isNaN(this.state.Rate))&&this.state.Loans!=""&&this.state.Rate!=""&&this.state.Rate<20&&this.state.Rate>0) {
+            if (this.state.LoadMounted)
+                ReactDOM.render(<Loan value={
+                    {
+                        Loans:this.state.Loans,
+                        Rate:this.state.Rate,
+                        Times:this.state.Times,
+                        Method:this.state.Method
+                    }
+
+            }/>, document.getElementById('loan'));
+        }
+    }
+    componentWillUpdate(){
+
+        console.log(this.state.Method+'init');
+
+        if(/^\d+$/.test(this.state.Loans)&&!(Number.isNaN(this.state.Rate))&&this.state.Loans!=""&&this.state.Rate!=""&&this.state.Rate<20&&this.state.Rate>0) {
+            this.refs.message.className = 'text-success'
+            this.refs.message.innerHTML = "Now your data is real."
+            this.refs.cal.removeAttribute('disabled');
+
+        } else if (this.state.Loans==""||this.state.Rate==""){
+            this.refs.message.className = 'help-block'
+            this.refs.message.innerHTML = "Please enter your financial data."
+            this.refs.cal.disabled = "disabled";
+        } else {
+            this.refs.message.className = 'text-danger'
+            this.refs.message.innerHTML = "There's something wrong with your financial data."
+            this.refs.cal.disabled = "disabled";
+        }
     }
 
     handleClick(e){
@@ -26,31 +68,44 @@ module.exports = class Mortgage extends ReactAdd.Component {
             position:e.target.name
         });
         ReactDOM.render(<App />,document.getElementById('root'))
+
     }
 
-    handleInput(e){
+    handleSelect(e){
         e.preventDefault();
-        let name = e.target.value
         this.setState({
-             name:e.target.value
+            Rate:e.target.value
         })
     }
 
     handleRadio(e){
         //e.preventDefault();
+        this.setState({
+            Method:e.target.value
+        })
     }
     handleSubmit(e){
         e.preventDefault();
-        ReactDOM.render(<Loan />,document.getElementById('loan'))
-    }
-    handleSelect(e){
-        e.preventDefault();
-    }
+        ReactDOM.render(<Loan value={
+            {
+                 Loans:this.state.Loans,
+                 Rate:this.state.Rate,
+                 Times:this.state.Times,
+                 Method:this.state.Method
+            }
 
+        } />,document.getElementById('loan'))
+        this.setState({
+            LoadMounted:true
+        })
+    }
     render(){
+
+
+
         return (
                 <div className="row" id="menu">
-                    <ul className="col-md-offset-2 col-md-8 row">
+                    <ul className=" col-md-5 row">
                         <div className="panel panel-default">
                             <div className="panel-heading">
                                 <h3 className="panel-title">
@@ -60,12 +115,19 @@ module.exports = class Mortgage extends ReactAdd.Component {
                             <div className="panel-body">
                                 <form role="form"  action="">
                                     <div className="form-group">
-                                        <label forHTML="sum" className="h5">Outstanding loans:</label>
-                                        <input type="text" onChange={ (e) => this.handleInput(e) } className="form-control" name="Loan" id="" placeholder="Please enter your total outstanding loans, unit: RMB"/>
-                                        <label forHTML="sum" className="h5">Interest Rate:</label>
-                                        <input type="text" onChange={ (e) => this.handleInput(e) } className="form-control" name="Rate" id="" placeholder="Please enter your interest rate, unit: %"/>
+                                        <label forHTML="Loans" className="h5">Outstanding loans:</label>
+                                        <input type="text" valueLink={linkState(this,'Loans')} className="form-control" name="Loans" placeholder="Please enter your total outstanding loans, unit: RMB"/>
+                                        <label forHTML="Rate" className="h5">Interest Rate:</label>
+                                        <input type="text" ref="Rate" valueLink={linkState(this,'Rate')} className="form-control" name="Rate" placeholder="Please enter your interest rate which is under 20%, unit: %"/>
+                                        <div className="place-holder" style={{margin:"10px"}}></div>
+                                        <select name="Rate" onChange={(e) => {this.handleSelect(e)}} className="form-control" id="">
+                                            <option value="4.9">2016 Benchmark interest rate</option>
+                                            <option value="3.43">2016 Benchmark interest rate's floor(70%)</option>
+                                            <option value="4.17">2016 Benchmark interest rate's floor(85%)</option>
+                                            <option value="5.39">2016 Benchmark interest rate's ceiling(110%)</option>
+                                        </select>
                                         <label forHTML="times" className="h5">Times</label>
-                                        <select onChange={ (e) => this.handleSelect(e) }  name="Times" className="form-control">
+                                        <select valueLink={linkState(this,'Times')}  name="Times" className="form-control">
                                             <option value="1">1 years , 1 * 12 times</option>
                                             <option value="2">2 years , 2 * 12 times</option>
                                             <option value="3">3 years , 3 * 12 times</option>
@@ -91,17 +153,17 @@ module.exports = class Mortgage extends ReactAdd.Component {
                                         </select>
                                         <div className="h4">
                                             <label className="checkbox-inline small">
-                                                <input type="radio" onChange={ (e) => this.handleRadio(e) } name="Method" id="" defaultChecked value="a"/>&nbsp;&nbsp;&nbsp;Average capital
+                                                <input type="radio" defaultChecked  onChange={ (e) => {this.handleRadio(e)} } name="Method" id="" value="a"/>&nbsp;&nbsp;&nbsp;Average capital
                                             </label>
                                             <label className="checkbox-inline small">
-                                                <input type="radio" onChange={ (e) => this.handleRadio(e) } name="Method" id="" value="i"/>&nbsp;&nbsp;&nbsp;Average capital plus interest
+                                                <input type="radio" name="Method"  onChange={ (e) => {this.handleRadio(e)} }  id="" value="i"/>&nbsp;&nbsp;&nbsp;Average capital plus interest
                                             </label>
                                         </div>
-                                        <p className="help-block">Please enter your financial data.</p>
+                                        <p ref="message" className="help-block">Please enter your financial data.</p>
                                     </div>
 
                                 </form>
-                                <button name="main" onClick={ (e) => {this.handleSubmit(e);}  } className="btn btn-block btn-success text-center">
+                                <button name="main"   onClick={ (e) => {this.handleSubmit(e);}  }  ref="cal"  className="btn btn-block btn-success text-center">
                                     Calculate
                                 </button>
                                 <button name="main" onClick={ (e) => {this.handleClick(e);}  } className="btn btn-block btn-primary text-center">
