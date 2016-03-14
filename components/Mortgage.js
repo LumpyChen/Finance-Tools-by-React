@@ -91,7 +91,8 @@ export default class Mortgage extends React.Component {
                  Loans:this.state.Loans,
                  Rate:this.state.Rate,
                  Times:this.state.Times,
-                 Method:this.state.Method
+                 Method:this.state.Method,
+                 icon:this.props.icon
             }
 
         } />,document.getElementById('loan'))
@@ -172,7 +173,7 @@ export default class Mortgage extends React.Component {
                             </div>
                         </div>
                     </ul>
-                    <div id="loan"></div>
+                    <div className="col-md-6" id="loan"></div>
                 </div>
             )
     }

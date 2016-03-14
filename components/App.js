@@ -16,9 +16,12 @@ export default class App extends React.Component {
         return (
             <div className="row" id="menu">
                 <ul className="col-md-offset-1 col-md-10 row">
-                    <div className="col-lg-4 text-center">
-                        <SecTool comp="Mortgage"   />
-                    </div>
+
+                        <SecTool comp="Mortgage" intro="Calculate your mortgage loan so you can
+                        formulate a plan on your spending." cap="Mortgage Loan's Calculator" icon="calculator" />
+                        <SecTool comp="Yuebao" intro="With Providing 7 days' interest rate of
+                        Tianhong funds, you can know the actual proceeds ." cap="Get Yuebao's interest rate" icon="money" />
+
                 </ul>
             </div>
         )
