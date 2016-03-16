@@ -42,15 +42,15 @@ export default class Yuebao extends React.Component {
         function changeMsg (ver){
             switch (ver) {
                 case 'empty':
-                    that.refs.message.className = 'help-block'
+                    that.refs.message.className = 'col-md-offset-1 col-sm-offset-1 help-block'
                     that.refs.message.innerHTML = "请输入您的金融数据。"
                     break;
                 case 'error':
-                    that.refs.message.className = 'text-danger'
+                    that.refs.message.className = 'col-md-offset-1 col-sm-offset-1 text-danger'
                     that.refs.message.innerHTML = "您输入的金融数据有误。"
                     break;
                 case 'pass':
-                    that.refs.message.className = 'text-success'
+                    that.refs.message.className = 'col-md-offset-1 col-sm-offset-1 text-success'
                     that.refs.message.innerHTML = "您输入的金融数据成立。"
             }
         }
@@ -65,6 +65,7 @@ export default class Yuebao extends React.Component {
                 break;
             } else {
                 this.state.verify = "pass"
+                this.state.submit = true;
             }
         }
 
@@ -167,7 +168,7 @@ export default class Yuebao extends React.Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <p ref="message" className="col-md-offset-1 col-sm-offset-1"></p>
+                                    <p ref="message" className="col-md-offset-1 help-block col-sm-offset-1">请输入您的金融数据。</p>
                                 </div>
 
 
