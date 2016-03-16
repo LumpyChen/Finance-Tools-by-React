@@ -22,7 +22,6 @@ export default class SecTool extends React.Component {
         this.setState({
             position:e.target.name
         });
-        console.log(this.refs['icon'])
         //console.log(eval(e.target.name))
         ReactDOM.render(React.createElement(eval(e.target.name).default,this.props.icon), document.getElementById('root'))
 
