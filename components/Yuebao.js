@@ -12,6 +12,7 @@ export default class Yuebao extends React.Component {
 
     constructor(props){
         super(props);
+        this.verify = "empty";
         this.state = {
             gross: "",
             first :"",
@@ -25,8 +26,9 @@ export default class Yuebao extends React.Component {
         }
     }
     componentWillUpdate(nexP,nexS){
-        console.log('in'+this.state.verify)
-        console.log(nexS.verify+'+')
+        // console.log('in'+this.state.verify)
+        // console.log(nexS.verify+'+')
+        var that = this;
         let arr = [
             this.state.first,
             this.state.second,
@@ -37,7 +39,6 @@ export default class Yuebao extends React.Component {
             this.state.seventh
         ]
         //console.log(arr);
-        var that = this
         function changeMsg (ver){
             switch (ver) {
                 case 'empty':
@@ -74,7 +75,7 @@ export default class Yuebao extends React.Component {
                 //console.log('pass');
             }
         }
-        window.verify = state;
+        this.verify = state;
         console.log('out'+state);
         changeMsg(state);
 
@@ -102,7 +103,7 @@ export default class Yuebao extends React.Component {
 
 
     render(){
-        console.log(window.verify)
+        // console.log(this.verify)
         return (
             <div className="row" id="menu">
                 <ul className=" col-md-offset-1 col-md-5 row">
@@ -208,7 +209,7 @@ export default class Yuebao extends React.Component {
                             linkState(this,'sixth'),
                             linkState(this,'seventh'),
                             linkState(this,'submit'),
-                            {value:window.verify}
+                            {value:this.verify}
                         ]
                     }  />
                 </div>
