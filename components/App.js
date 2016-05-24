@@ -3,6 +3,7 @@
  */
 import ReactDOM from 'react-dom';
 import SecTool from './SecTool'
+import { createStore } from 'redux';
 
 export default class App extends React.Component {
 
@@ -21,7 +22,7 @@ export default class App extends React.Component {
                         formulate a plan on your spending." cap="Mortgage Loan's Calculator" icon="calculator" />
                         <SecTool comp="Yuebao" intro="With Providing 7 days' interest rate of
                         Tianhong funds, you can know the actual proceeds ." cap="Get Yuebao's interest rate" icon="money" />
-
+                        <SecTool comp="CAPM" intro="Analyse the price of serveral stocks by Capital Asset Pricing Model." cap="CAMP pricing" icon="line-chart" />
                 </ul>
             </div>
         )

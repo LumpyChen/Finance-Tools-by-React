@@ -4,7 +4,8 @@
 
 import ReactDOM from 'react-dom';
 var Mortgage = require('./Mortgage')
-var Yuebao = require('./Yuebao')
+var Yuebao = require('./Yuebao');
+var CAPM = require('./CAPM')
 
 export default class SecTool extends React.Component {
     constructor(props){

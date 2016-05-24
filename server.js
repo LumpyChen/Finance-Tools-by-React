@@ -18,5 +18,4 @@ new WebpackDevServer(webpack(config), {
         console.log(err);
     }
     console.log(`Listening at localhost:${PORT}`);
-console.log(`${config.output.publicPath}/${config.output.path}`);
 });
