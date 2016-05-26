@@ -20,8 +20,8 @@ export const changeRf = (rf) => ({
         rf
 })
 
-export const verify = (stk,rf) => ({
-        type: 'VERIFY',
+export const verifyState = (stk,rf) => ({
+        type: 'VERIFY_STATE',
         stk,
         rf
 })

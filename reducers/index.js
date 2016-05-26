@@ -1,7 +1,7 @@
 /**
  * Created by Lumpychen on 16/5/21.
  */
-import { createStore,combineReducers } from 'redux';
+import { createStore,combineReducers,compose } from 'redux';
 import stocks from './stocks';
 import showSolution from './showSolution'
 import changeRf from './changeRf'
@@ -14,11 +14,10 @@ const rootReducer = combineReducers({
     verify
 })
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer,compose(
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+))
 
-store.subscribe(()=>{
-    console.log(store.getState());
-})
 
 
 export default store;

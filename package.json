@@ -4,6 +4,7 @@
   "description": "Finance lesson's homework's expanding.",
   "main": "server.js",
   "dependencies": {
+    "d3": "^3.5.17",
     "react-link-state": "^0.1.2",
     "react-mixin": "^2.0.2",
     "react-redux": "^4.4.5",

@@ -1,7 +1,7 @@
 /* Created by Lumpychen on 16/5/23.*/
 const verify = (state = ['empty','empty'], action) => {
     switch (action.type) {
-        case 'VERIFY':
+        case 'VERIFY_STATE':
             if (action.stk&&action.rf)
                 return [action.stk,action.rf];
             else if (action.stk)

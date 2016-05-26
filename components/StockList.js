@@ -1,15 +1,14 @@
-/**
- * Created by Lumpychen on 16/5/21.
- */
-import { removeStock } from '../actions/CAPMaction';
+/* Created by Lumpychen on 16/5/21.*/
+import { removeStock,verifyState } from '../actions/CAPMaction';
 import { connect } from 'react-redux';
 
 const mapStateToProps = ({ stocks }) => ({
-    stocks
+    stocks,
 });
 
 const mapDispatchToProps = dispatch => ({
-    removeStock:id => dispatch(removeStock(id))
+    removeStock:id => dispatch(removeStock(id)),
+    verifyState: rf => dispatch(verifyState(undefined,rf))
 })
 
 class StockList extends React.Component {
@@ -18,8 +17,8 @@ class StockList extends React.Component {
     }
     handleClick(e,id){
         e.preventDefault();
-        console.log(id)
         this.props.removeStock(id)
+        this.props.updateFather();
     }
     render(){
         return(
@@ -38,8 +37,8 @@ class StockList extends React.Component {
                         {this.props.stocks.map((stock,id)=>
                             <tr key={id} >
                                 <td>{id+1}</td>
-                                <td>{stock.data.yieldStk}</td>
-                                <td>{stock.data.yieldMkt}</td>
+                                <td>{parseFloat(stock.data.yieldStk).toFixed(2)}</td>
+                                <td>{parseFloat(stock.data.yieldMkt).toFixed(2)}</td>
                                 <td>
                                     <button className="btn btn-xs btn-danger" onClick = {(e)=>this.handleClick(e,stock.id)}>删除</button>
                                 </td>
