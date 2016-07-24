@@ -3,7 +3,8 @@
  */
 const path = require('path');
 const webpack = require('webpack');
-
+const rabbit = require('./RabbitModulesSizeAnalyzer/index.js');
+console.log(rabbit);
 module.exports = {
     devtool: 'eval',
     entry: [
